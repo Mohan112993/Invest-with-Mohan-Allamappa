@@ -612,6 +612,8 @@
   @media (max-width: 900px) {
     nav { padding: 14px 20px; }
     .nav-links { display: none; }
+    .hamburger-btn { display: flex !important; }
+    .mobile-nav-menu.open { display: flex !important; }
     section { padding: 60px 20px; }
     .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
     .hero-visual { display: none; }
@@ -622,6 +624,77 @@
     .tips-grid { grid-template-columns: 1fr; }
     .input-row { grid-template-columns: 1fr; }
     .disclaimer { padding: 30px 20px; }
+    .three-paths-inner { grid-template-columns: 1fr !important; }
+  }
+
+  @media (max-width: 768px) {
+    /* Hero section */
+    section.hero { padding: 100px 20px 52px !important; }
+
+    /* Section padding overrides */
+    section[style*="padding:80px"] { padding: 52px 20px !important; }
+    section[style*="padding:80px 80px"] { padding: 52px 20px !important; }
+    section[style*="padding:100px 80px"] { padding: 60px 20px !important; }
+    section[style*="padding:80px 80px 60px"] { padding: 52px 20px !important; }
+
+    /* Three paths */
+    .three-paths-inner { grid-template-columns: 1fr !important; gap: 16px !important; }
+
+    /* Compounding cards - 3 col to 1 col */
+    div[style*="grid-template-columns:1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
+    div[style*="grid-template-columns: 1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
+    div[style*="repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+    div[style*="repeat(3, 1fr)"] { grid-template-columns: 1fr !important; }
+
+    /* 2 col grids to 1 col */
+    div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+    div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+
+    /* Age and amount selector - 2 col on mobile instead of 4 */
+    #ageOptions, #amountOptions { grid-template-columns: 1fr 1fr !important; }
+
+    /* Crypto advice grid */
+    div[style*="grid-template-columns:1fr 1fr;gap:16px"] { grid-template-columns: 1fr !important; }
+
+    /* Max widths become full width */
+    div[style*="max-width:800px"], div[style*="max-width:820px"],
+    div[style*="max-width:900px"], div[style*="max-width:960px"],
+    div[style*="max-width:760px"] { max-width: 100% !important; }
+
+    /* Returns table - horizontal scroll */
+    .returns-box { overflow-x: auto; }
+    .returns-header, .returns-row { min-width: 520px; }
+
+    /* Steps grid */
+    .steps-grid { grid-template-columns: 1fr !important; }
+
+    /* Books grid */
+    .books-grid { grid-template-columns: 1fr 1fr !important; }
+
+    /* Data grid - 4 col to 2 col */
+    .data-grid { grid-template-columns: 1fr 1fr !important; }
+
+    /* Reasons grid - 3 col to 1 col */
+    .reasons-grid { grid-template-columns: 1fr !important; }
+
+    /* Types grid */
+    .types-grid { grid-template-columns: 1fr !important; }
+
+    /* Fund picker suggestion stats */
+    div[style*="grid-template-columns:1fr 1fr 1fr;gap:12px"] { grid-template-columns: 1fr !important; }
+
+    /* Result grid in calculator */
+    .result-grid { grid-template-columns: 1fr !important; }
+
+    /* Prathamesh and Sudeep profile rows */
+    div[style*="display:flex;gap:24px;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap"] { flex-direction: column; }
+
+    /* Hero profile card stats */
+    div[style*="display:flex;gap:24px;flex-shrink:0"] { flex-wrap: wrap; gap: 12px !important; }
+
+    /* Font size adjustments */
+    .section-title { font-size: 28px !important; }
+    h1[style*="font-size:clamp"] { font-size: 32px !important; }
   }
 </style>
 </head>
@@ -637,7 +710,21 @@
     <a href="#calculator">Calculator</a>
     <a href="#start">How to Start</a>
   </div>
+  <button class="hamburger-btn" onclick="toggleMobileNav()" style="display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;">
+    <span style="display:block;width:24px;height:2px;background:#2D3436;border-radius:2px;"></span>
+    <span style="display:block;width:24px;height:2px;background:#2D3436;border-radius:2px;"></span>
+    <span style="display:block;width:24px;height:2px;background:#2D3436;border-radius:2px;"></span>
+  </button>
 </nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav-menu" style="display:none;position:fixed;top:57px;left:0;right:0;background:rgba(248,244,238,0.98);backdrop-filter:blur(12px);z-index:99;flex-direction:column;border-bottom:1px solid rgba(64,145,108,0.15);padding:8px 0;">
+  <a href="#what" onclick="closeMobileNav()" style="padding:14px 24px;text-decoration:none;color:#2D3436;font-size:15px;font-weight:500;border-bottom:1px solid rgba(0,0,0,0.05);">What is MF?</a>
+  <a href="#why" onclick="closeMobileNav()" style="padding:14px 24px;text-decoration:none;color:#2D3436;font-size:15px;font-weight:500;border-bottom:1px solid rgba(0,0,0,0.05);">Why Invest?</a>
+  <a href="#data" onclick="closeMobileNav()" style="padding:14px 24px;text-decoration:none;color:#2D3436;font-size:15px;font-weight:500;border-bottom:1px solid rgba(0,0,0,0.05);">Real Numbers</a>
+  <a href="#calculator" onclick="closeMobileNav()" style="padding:14px 24px;text-decoration:none;color:#2D3436;font-size:15px;font-weight:500;border-bottom:1px solid rgba(0,0,0,0.05);">Calculator</a>
+  <a href="#start" onclick="closeMobileNav()" style="padding:14px 24px;text-decoration:none;color:#2D3436;font-size:15px;font-weight:500;">How to Start</a>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="home" style="grid-template-columns:1fr;max-width:780px;margin:0 auto;padding:140px 80px 80px;">
@@ -687,6 +774,8 @@
 
       <p>I have been working in financial markets for several years. I understand algo trading, I actively invest in mutual funds and crypto, and I am always curious to learn more. But I am not here to teach you complex finance. I am just your friend who learned a few things the hard way and wants to save you the trouble.</p>
 
+      <p>And I want to be honest about how I learn - it is not always from textbooks or paid courses. I learn from <strong style="color:var(--forest)">YouTube, articles, webinars</strong> - but honestly, most of what has shaped my thinking has come from <strong style="color:var(--forest)">my friends.</strong> From watching their investments grow. From their mistakes. From the casual conversations we have had where someone mentions something they tried and it changed everything. Real people. Real money. Real lessons. That has been my best finance school.</p>
+
       <p><strong style="color:var(--forest)">And honestly, my investment journey started because of one person.</strong></p>
     </div>
 
@@ -694,33 +783,101 @@
     <div style="margin:40px 0;background:var(--cream);border-radius:24px;padding:40px;position:relative;overflow:hidden;">
       <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--mint),var(--sage))"></div>
 
-      <div style="display:flex;gap:24px;align-items:flex-start;margin-bottom:28px;">
+      <div style="display:flex;gap:24px;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;">
         <img src="https://corporatebytes.in/wp-content/uploads/2018/02/Prathamesh-Hirve.jpg"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-             style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid var(--mint);">
-        <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--forest),var(--mint));display:none;align-items:center;justify-content:center;font-size:32px;flex-shrink:0;">🚀</div>
-        <div>
+             style="width:88px;height:88px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid var(--mint);">
+        <div style="width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,var(--forest),var(--mint));display:none;align-items:center;justify-content:center;font-size:32px;flex-shrink:0;">🚀</div>
+        <div style="flex:1;min-width:200px;">
           <div style="font-weight:700;color:var(--forest);font-size:19px;margin-bottom:4px">Prathamesh Hirve</div>
-          <div style="color:var(--mint);font-size:13px;font-weight:600">Scientist and Engineer at ISRO and a very dear friend</div>
-          <div style="color:var(--muted);font-size:13px;margin-top:6px">Mumbai's first ever ISRO scientist. Selected from 16,000 applicants. One of the most inspiring and knowledgeable people I have ever met.</div>
+          <div style="color:var(--mint);font-size:13px;font-weight:600;margin-bottom:6px">Scientist and Engineer at ISRO &middot; Mumbai's first ever ISRO scientist &middot; A very dear friend</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#E8F5E9;color:var(--forest);">Selected from 16,000 applicants</span>
+            <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#E8F5E9;color:var(--forest);">Featured in national media</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fame callout -->
+      <div style="background:white;border:1px solid rgba(64,145,108,0.25);border-radius:16px;padding:18px 22px;margin-bottom:24px;display:flex;gap:14px;align-items:flex-start;">
+        <div style="font-size:22px;flex-shrink:0;">🌟</div>
+        <div>
+          <div style="font-weight:700;color:var(--forest);font-size:14px;margin-bottom:6px;">He is not just my friend - he is genuinely famous and inspiring.</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.8;">His story has been covered by national media across India. <strong style="color:var(--forest)">Please Google him - or read this.</strong> You will understand why he is one of the most inspiring people I have ever met.</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
+            <a href="https://www.postoast.com/celebrities-hindi-medium-school/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--sage);color:var(--forest);border-radius:20px;text-decoration:none;font-size:12px;font-weight:700;">📰 Read about him →</a>
+            <a href="https://www.google.com/search?q=Prathamesh+Hirve+ISRO+Mumbai" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--forest);color:white;border-radius:20px;text-decoration:none;font-size:12px;font-weight:700;">🔍 Google Prathamesh Hirve →</a>
+          </div>
         </div>
       </div>
 
       <div style="display:flex;flex-direction:column;gap:18px;font-size:16px;line-height:1.9;color:var(--muted);">
         <p>Around 2019, Prathamesh sat us down and explained what he called the <strong style="color:var(--forest)">"Million Dollar Tip."</strong> He walked us through how countries work. What GDP is. How the Indian economy grows every year. How the Nifty 50 index is basically a mirror of that growth. And why simply investing in a Nifty 50 mutual fund every month, without overthinking it, is one of the smartest things any ordinary person in India can do for their future.</p>
-
         <p>He did not teach us stock picking or trading strategies. He kept it simple. He said: invest consistently, stay patient, and let India's growth do the work for you.</p>
-
         <p>That one conversation clicked something inside me. I started attending webinars on investing. Paid ones. I kept learning. About a year later I attended another paid webinar just to test myself. And I realised I already knew 90% of what they were teaching. That moment told me the basics of investing are not hard. You just need someone to explain them clearly, once, without making it complicated.</p>
-
         <p><strong style="color:var(--forest)">This guide is that explanation. Brick by brick. No jargon. No pressure. Just the basics that will make a real difference over time.</strong></p>
       </div>
+    </div>
+
+    <!-- Sudeep Gedam - mentor -->
+    <div style="margin:40px 0;background:linear-gradient(135deg,#F0F7F4,#E8F5E9);border-radius:24px;padding:40px;position:relative;overflow:hidden;border:1px solid rgba(64,145,108,0.2);">
+      <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--amber))"></div>
+      <div style="font-size:11px;font-weight:700;color:var(--gold);letter-spacing:2px;margin-bottom:16px;">ANOTHER PERSON WHO SHAPED HOW I THINK</div>
+
+      <div style="display:flex;gap:24px;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;">
+        <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#1B4332,#D4A017);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:26px;font-weight:700;color:white;flex-shrink:0;border:3px solid var(--gold);">S</div>
+        <div style="flex:1;min-width:200px;">
+          <div style="font-weight:700;color:var(--forest);font-size:19px;margin-bottom:3px;">Sudeep Gedam</div>
+          <div style="color:var(--gold);font-size:13px;font-weight:600;margin-bottom:6px;">Director, Impact Technologies &middot; One of my mentors</div>
+          <a href="https://www.imp-tech.net" target="_blank" style="font-size:12px;color:var(--mint);text-decoration:none;font-weight:600;">🔗 imp-tech.net →</a>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;font-size:15px;line-height:1.9;color:var(--muted);">
+        <p>Sudeep Sir does not do individual stocks - he invests in his own business, and that says a lot about how he thinks. He keeps it simple. Traditional methods, but with the right current-generation tweaks applied on top. No overcomplication. No chasing trends. Just a clear head about where money goes and why.</p>
+        <p>Whenever I get fired up about markets and start talking about going all-in on something, he is the person who brings me back to earth - not by saying I am wrong, but by asking the right questions. That grounding has genuinely saved me more than once.</p>
+        <p>And here is the thing I relate to most about him - he is also someone who spends. He once told me, <strong style="color:var(--forest)">"Mohan, spending is an art."</strong> And I could not agree more. Because money is not just for hoarding - it is for living. The goal is not to save every rupee but to earn well, invest wisely, and enjoy what you have built. He lives that balance every day. I look up to him for it.</p>
+      </div>
+
+      <div style="margin-top:20px;background:white;border-radius:14px;padding:18px 22px;border-left:4px solid var(--gold);">
+        <div style="font-size:13px;color:var(--muted);line-height:1.8;font-style:italic;">"Earn with purpose. Invest with patience. And spend with joy. That is the full picture - not just one of the three."</div>
+        <div style="font-size:12px;color:var(--forest);font-weight:700;margin-top:8px;">- Mohan, inspired by Sudeep Sir</div>
+      </div>
+    </div>
+
+    <!-- How I learn -->
+    <div style="margin:32px 0;padding:28px 32px;background:var(--cream);border-radius:20px;border-left:4px solid var(--mint);">
+      <div style="font-weight:700;color:var(--forest);font-size:16px;margin-bottom:12px;">📚 How I actually learn</div>
+      <div style="font-size:15px;color:var(--muted);line-height:1.9;">I pick up knowledge from everywhere. YouTube videos. Articles. Paid webinars. Free sessions. And importantly - from my friends too. From watching their investments grow, from their mistakes, from the casual conversations where someone mentions something they tried and it changed everything. Real people. Real money. Real lessons. That has always been one of the most valuable sources for me.</div>
+    </div>
+
+    <!-- Gold story -->
+    <div style="margin:32px 0;padding:28px 32px;background:linear-gradient(135deg,#fffdf0,#fff8dc);border-radius:20px;border-left:4px solid var(--gold);">
+      <div style="font-weight:700;color:var(--charcoal);font-size:16px;margin-bottom:12px;">🥇 A small story about gold</div>
+      <div style="font-size:15px;color:var(--muted);line-height:1.9;">My friend <strong style="color:var(--forest)">Sharath Shetty</strong> bought gold in 2024 and sold half of it in 2026 - walked away with more than 60% profit. Simple decision. Patient hold. And my wife Shabna - she does not follow markets or stocks at all. She follows the traditional way. She enrolled us in a <strong style="color:var(--forest)">Malabar Gold monthly scheme</strong> - the kind your mother or grandmother would suggest. Discount on making charges, averaged rate month on month, around 40% savings built in by the end. No charts. No analysis. Just a traditional method, quietly trusted. And it worked.<br><br>
+      I am not recommending gold specifically - whether physical or digital is a personal choice. Just sharing that sometimes the old way is a good way.</div>
+    </div>
+
+    <!-- Real estate note -->
+    <div style="margin:32px 0;padding:24px 28px;background:var(--cream);border-radius:16px;border-left:4px solid var(--gold);">
+      <div style="font-weight:700;color:var(--charcoal);font-size:15px;margin-bottom:8px;">🏠 A note on Real Estate</div>
+      <div style="color:var(--muted);font-size:15px;line-height:1.8;">Honestly? Real estate is a very good investment. I am not going to tell you it is not. But personally, I look at a home as an emotion - a place to live, to feel safe, to be happy - not just a number on a spreadsheet. As an investment it still makes sense for many people. But it requires large capital, it is illiquid, and it differs a lot from person to person. Take this as a friendly note, not a recommendation either way.</div>
     </div>
 
     <div style="display:flex;flex-direction:column;gap:16px;font-size:17px;line-height:1.9;color:var(--muted);">
       <p>I personally invest in Large Cap and Flexi Cap mutual funds for the long term. I have been in crypto since 2021. And I am planning to add Small Cap mutual funds soon. I am still learning every day. But I know enough to help you get started and that is all that matters right now.</p>
       <p>Beyond the 4000+ traders I have worked with professionally, I have spent years knocking on the doors of friends, telling them to start investing. Most of them kept delaying. A few listened back in 2021. Those who did are now genuinely happy and sitting on strong early gains. The ones who waited are still watching from the sidelines. I am not saying this to make anyone feel bad. I am saying this because I do not want you to be the person who waits another year.</p>
-      <p style="color:var(--forest);font-weight:700;font-size:18px;">Build your base first. Everything else comes after. 🌱</p>
+
+      <!-- Core message -->
+      <div style="margin-top:8px;background:var(--forest);border-radius:20px;padding:32px 36px;">
+        <p style="color:rgba(255,255,255,0.9);font-size:16px;line-height:1.9;margin-bottom:20px;">Get the basics right. Invest in India - in its growth, its companies, its future. The Nifty 50 is literally a mirror of how this country is doing. When India grows, your SIP grows with it.</p>
+        <p style="color:rgba(255,255,255,0.9);font-size:16px;line-height:1.9;margin-bottom:20px;">And real estate, gold, crypto - there are real examples of people making real money in all of these. Sharath made 60% on gold. People have doubled money in property. None of this is magic. It is patience and starting at the right time. But none of it replaces the foundation.</p>
+        <div style="border-top:1px solid rgba(255,255,255,0.15);padding-top:20px;margin-top:4px;">
+          <p style="color:var(--sage);font-weight:700;font-size:18px;margin-bottom:10px;">But here is the most important thing I want to leave you with.</p>
+          <p style="color:white;font-size:17px;line-height:1.9;font-weight:500;">Invest in yourself first. <strong style="color:var(--gold)">Upskill. Upgrade. Keep learning.</strong> Try new ways to improve your earning - because that is where the money to invest comes from. A bigger income, invested consistently, compounds into a completely different life. No strategy beats that. The best investment you will ever make is in your own ability to earn more.</p>
+        </div>
+        <p style="color:var(--sage);font-weight:700;font-size:17px;margin-top:20px;">Build your base. Invest in India. Invest in yourself. 🌱</p>
+      </div>
     </div>
   </div>
 </section>
@@ -796,22 +953,20 @@
         </div>
       </div>
 
-      <!-- Step 7 - Trading -->
+      <!-- Step 7 - Trading / PMS -->
       <div style="display:flex;gap:20px;align-items:flex-start;padding:28px;background:#EFEBE9;border-radius:20px;border-left:6px solid #4E342E;">
         <div style="width:44px;height:44px;border-radius:50%;background:#4E342E;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;color:white;flex-shrink:0;">7</div>
         <div>
-          <div style="font-weight:700;color:#3E2723;font-size:17px;margin-bottom:6px;">Trading - Algo Trading Only</div>
-          <div style="color:#4E342E;font-size:15px;line-height:1.7;">If you want to trade, trade smart. Manual trading - sitting in front of charts all day, emotional decisions, panic selling - that is not trading, that is gambling. Algo trading is different. You define rules. The system executes. No emotions. No screen time. This is what I work with every day and conduct webinars on. But it comes last. After everything above is in order. This is for those who are serious about automating their market strategy.</div>
-          <div style="margin-top:10px;font-size:13px;color:#4E342E;font-weight:600;">Manual trading = avoid · Algo trading = the right way · Only after steps 1 to 6</div>
+          <div style="font-weight:700;color:#3E2723;font-size:17px;margin-bottom:6px;">Trading or Expert Portfolio Strategies - Only After Step 4 is Running</div>
+          <div style="color:#4E342E;font-size:15px;line-height:1.7;">Once your MF base is solid, you have two options here. If you want to explore trading - only algo trading, never manual. You define rules, the system executes, no emotions, no screen time. I conduct webinars on this every Friday. <strong>But if trading is not for you at all - that is completely fine.</strong> I can also help you access professionally built strategies run by expert portfolio managers, matched to your capital and risk profile. Tell me your situation and I will guide you personally on which route makes more sense.</div>
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:12px;font-weight:600;padding:4px 12px;background:rgba(78,52,46,0.15);border-radius:20px;color:#4E342E;">Algo trading = the right way to trade</span>
+            <span style="font-size:12px;font-weight:600;padding:4px 12px;background:rgba(212,160,23,0.15);border-radius:20px;color:#7F6000;">OR: Expert portfolio manager strategies</span>
+            <span style="font-size:12px;font-weight:600;padding:4px 12px;background:#EFEBE9;border-radius:20px;color:#4E342E;">Only after steps 1 to 6</span>
+          </div>
         </div>
       </div>
 
-    </div>
-
-    <!-- Real estate note -->
-    <div style="margin-top:32px;padding:24px 28px;background:var(--cream);border-radius:16px;border-left:4px solid var(--gold);">
-      <div style="font-weight:700;color:var(--charcoal);font-size:15px;margin-bottom:8px;">🏠 A note on Real Estate</div>
-      <div style="color:var(--muted);font-size:15px;line-height:1.8;">Honestly? Real estate is a very good investment. I am not going to tell you it is not. But personally, I look at a home as an emotion - a place to live, to feel safe, to be happy - not just a number on a spreadsheet. As an investment it still makes sense for many people. But it requires large capital, it is illiquid, and it differs a lot from person to person. I am not covering it in detail here because investing is deeply personal and I want to help you with what I know best. Take this as a friendly note, not a recommendation either way.</div>
     </div>
 
   </div>
@@ -819,75 +974,133 @@
 
 <!-- TWO PATHS SECTION -->
 <section style="background:var(--forest);padding:80px;">
-  <div style="max-width:900px;margin:0 auto;text-align:center;">
-    <div class="section-tag" style="color:var(--sage)">Two Different Worlds</div>
-    <h2 class="section-title" style="color:var(--white)">Which path are you on?</h2>
-    <p style="color:rgba(255,255,255,0.7);font-size:17px;line-height:1.8;max-width:640px;margin:0 auto 20px;">Before we go further - I want to be very clear about something. These are two completely different things. The order matters a lot.</p>
+  <div style="max-width:960px;margin:0 auto;text-align:center;">
+    <div class="section-tag" style="color:var(--sage)">Three Different Worlds</div>
+    <h2 class="section-title" style="color:var(--white)">Which path is right for you?</h2>
+    <p style="color:rgba(255,255,255,0.7);font-size:17px;line-height:1.8;max-width:680px;margin:0 auto 20px;">Before we go further - I want to be very clear about something. There is a right order here. Please read this carefully.</p>
 
-    <!-- Important note -->
-    <div style="background:rgba(212,160,23,0.15);border:1px solid var(--gold);border-radius:16px;padding:20px 28px;margin-bottom:48px;text-align:left;">
-      <div style="font-size:20px;margin-bottom:8px">⚠️</div>
-      <div style="color:var(--gold);font-weight:700;font-size:15px;margin-bottom:8px">My strong personal advice - read this first.</div>
-      <div style="color:rgba(255,255,255,0.8);font-size:14px;line-height:1.8">
-        Please invest first. Build a strong financial base with mutual funds - SIP, long-term, consistent. Let that grow quietly in the background. Only THEN explore trading - and even then, algo trading specifically, not manual trading (I will explain why). Do not do it the other way around. I have seen too many people lose money trying to trade before they have any savings base. Investing = building wealth slowly and safely. Trading = a separate skill that requires patience, systems, and the right platform. Get the foundation right first.
+    <!-- Strong rule banner -->
+    <div style="background:rgba(116,198,157,0.12);border:2px solid var(--sage);border-radius:20px;padding:28px 36px;margin-bottom:48px;text-align:left;">
+      <div style="display:flex;align-items:flex-start;gap:16px;">
+        <div style="font-size:32px;flex-shrink:0;">🔑</div>
+        <div>
+          <div style="color:var(--sage);font-weight:700;font-size:17px;margin-bottom:10px;">Rule #1 - Always long-term investing first. No exceptions.</div>
+          <div style="color:rgba(255,255,255,0.85);font-size:15px;line-height:1.9;">
+            I have been an educator of algo trading for years. I have helped thousands of traders automate their strategies. And I will always tell you this first: <strong style="color:var(--sage)">build your long-term investment base before anything else.</strong> SIP. Mutual funds. Compounding. That is the foundation. Everything else - trading, strategies, portfolios - comes only after this is running well. I have seen too many people skip this step and regret it. Do not be that person.
+          </div>
+        </div>
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;text-align:left;">
-      <!-- Investing path -->
-      <div style="background:rgba(255,255,255,0.07);border:2px solid var(--sage);border-radius:24px;padding:40px 32px;transition:all 0.2s;">
-        <div style="font-size:48px;margin-bottom:20px">🌱</div>
-        <div style="font-size:11px;font-weight:700;color:var(--sage);letter-spacing:2px;margin-bottom:12px">PATH 1 - START HERE</div>
-        <div style="font-family:'Fraunces',serif;font-size:28px;color:var(--white);margin-bottom:16px;line-height:1.2">Long-Term Investing via Mutual Funds</div>
-        <div style="color:rgba(255,255,255,0.7);font-size:15px;line-height:1.8;margin-bottom:28px">
-          This is what this entire guide is about. SIP. Compounding. Patience. You invest ₹1,000 to ₹50,000 per month (and increase as you grow), forget about it for 10-15 years, and watch it multiply. No daily screen time. No stress. No expertise needed. This is what I personally do - and what I want every friend of mine to start with.
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
-          <div style="display:flex;gap:10px;align-items:center;color:rgba(255,255,255,0.8);font-size:14px">
-            <span style="color:var(--sage);font-weight:700">✓</span> Start with as little as ₹1,000 per month
-          </div>
-          <div style="display:flex;gap:10px;align-items:center;color:rgba(255,255,255,0.8);font-size:14px">
-            <span style="color:var(--sage);font-weight:700">✓</span> No market knowledge needed
-          </div>
-          <div style="display:flex;gap:10px;align-items:center;color:rgba(255,255,255,0.8);font-size:14px">
-            <span style="color:var(--sage);font-weight:700">✓</span> Works completely passively
-          </div>
-          <div style="display:flex;gap:10px;align-items:center;color:rgba(255,255,255,0.8);font-size:14px">
-            <span style="color:var(--sage);font-weight:700">✓</span> 12-15% average returns historically
-          </div>
-        </div>
-        <a href="#what" style="display:inline-block;background:var(--sage);color:var(--forest);padding:14px 28px;border-radius:50px;font-weight:700;font-size:14px;text-decoration:none;">Continue Reading This Guide →</a>
-      </div>
-
-      <!-- Trading path -->
-      <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:24px;padding:40px 32px;">
-        <div style="font-size:48px;margin-bottom:20px">🤖</div>
-        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:2px;margin-bottom:12px">PATH 2 - AFTER YOU INVEST</div>
-        <div style="font-family:'Fraunces',serif;font-size:28px;color:var(--white);margin-bottom:16px;line-height:1.2">Algo Trading </div>
-        <div style="color:rgba(255,255,255,0.6);font-size:15px;line-height:1.8;margin-bottom:28px">
-          Once your investing foundation is strong - this is the next world to explore. Algo trading means using automated systems to trade the markets, without sitting in front of a screen all day. No emotions. No guesswork. Just a system that executes your strategy. I conduct free live webinars on this every Friday - and Mahesh builds real strategies live on air.
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
-          <div style="display:flex;gap:10px;align-items:center;color:rgba(255,255,255,0.6);font-size:14px">
-            <span style="color:var(--amber);font-weight:700">→</span> Automated - no manual trading
-          </div>
-          <div style="display:flex;gap:10px;align-items:center;color:rgba(255,255,255,0.6);font-size:14px">
-            <span style="color:var(--amber);font-weight:700">→</span> No coding required - drag and drop
-          </div>
-          <div style="display:flex;gap:10px;align-items:center;color:rgba(255,255,255,0.6);font-size:14px">
-            <span style="color:var(--amber);font-weight:700">→</span> Free weekly webinar - every Friday
-          </div>
-          <div style="display:flex;gap:10px;align-items:center;color:rgba(255,255,255,0.6);font-size:14px">
-            <span style="color:var(--amber);font-weight:700">→</span> Join only after building MF base
-          </div>
-        </div>
-        <a href="https://tradetron.tech/html-view/webinars" target="_blank" style="display:inline-block;background:rgba(255,255,255,0.1);color:var(--white);padding:14px 28px;border-radius:50px;font-weight:700;font-size:14px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">Learn About Algo Trading →</a>
+    <!-- Mohan's personal note on algo -->
+    <div style="background:rgba(212,160,23,0.12);border:1px solid var(--gold);border-radius:16px;padding:20px 28px;margin-bottom:48px;text-align:left;">
+      <div style="color:var(--gold);font-weight:700;font-size:14px;margin-bottom:8px;">⚠️ A note from me on trading</div>
+      <div style="color:rgba(255,255,255,0.8);font-size:14px;line-height:1.8;">
+        Though I conduct algo trading webinars and have educated 4000+ traders - I always say this first: <strong style="color:white;">do your mutual funds first.</strong> Algo trading is a powerful tool, but it is a skill that requires the right mindset, platform, and patience. The foundation of your wealth should always be long-term, passive SIP investing. Only once that is in place should you explore trading - and even then, always algo trading, never manual trading.
       </div>
     </div>
 
-    <p style="color:rgba(255,255,255,0.4);font-size:13px;margin-top:28px;font-style:italic">The rest of this guide is entirely about mutual fund investing - Path 1. Take your time with it.</p>
+    <!-- Three path cards -->
+    <div class="three-paths-inner" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;text-align:left;">
+
+      <!-- PATH 1 - Mutual Funds -->
+      <div style="background:rgba(255,255,255,0.07);border:2px solid var(--sage);border-radius:24px;padding:36px 28px;display:flex;flex-direction:column;">
+        <div style="font-size:44px;margin-bottom:16px">🌱</div>
+        <div style="font-size:10px;font-weight:700;color:var(--sage);letter-spacing:2px;margin-bottom:10px">PATH 1 - START HERE ALWAYS</div>
+        <div style="font-family:'Fraunces',serif;font-size:22px;color:var(--white);margin-bottom:14px;line-height:1.25">Mutual Funds</div>
+        <div style="color:rgba(255,255,255,0.7);font-size:14px;line-height:1.8;margin-bottom:22px;flex:1;">
+          SIP. Compounding. Patience. Invest Rs 1,000 to Rs 50,000 per month, forget about it for 10 to 15 years, and watch it multiply. No daily screen time. No stress. No expertise needed. This is what I personally do - and what I want every friend of mine to start with. Always Step 1.
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px;">
+          <div style="display:flex;gap:8px;align-items:center;color:rgba(255,255,255,0.8);font-size:13px"><span style="color:var(--sage);font-weight:700">✓</span> Start with as little as Rs 1,000 per month</div>
+          <div style="display:flex;gap:8px;align-items:center;color:rgba(255,255,255,0.8);font-size:13px"><span style="color:var(--sage);font-weight:700">✓</span> No market knowledge needed</div>
+          <div style="display:flex;gap:8px;align-items:center;color:rgba(255,255,255,0.8);font-size:13px"><span style="color:var(--sage);font-weight:700">✓</span> Works completely passively</div>
+          <div style="display:flex;gap:8px;align-items:center;color:rgba(255,255,255,0.8);font-size:13px"><span style="color:var(--sage);font-weight:700">✓</span> 12-15% average returns historically</div>
+        </div>
+        <a href="#what" style="display:inline-block;background:var(--sage);color:var(--forest);padding:13px 24px;border-radius:50px;font-weight:700;font-size:13px;text-decoration:none;text-align:center;">Continue Reading This Guide →</a>
+      </div>
+
+      <!-- PATH 2 - Stocks & Crypto -->
+      <div style="background:rgba(212,160,23,0.08);border:2px solid rgba(212,160,23,0.5);border-radius:24px;padding:36px 28px;display:flex;flex-direction:column;">
+        <div style="font-size:44px;margin-bottom:16px">📈</div>
+        <div style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:2px;margin-bottom:10px">PATH 2 - AFTER MF IS RUNNING</div>
+        <div style="font-family:'Fraunces',serif;font-size:22px;color:var(--white);margin-bottom:14px;line-height:1.25">Stocks &amp; Crypto</div>
+        <div style="color:rgba(255,255,255,0.7);font-size:14px;line-height:1.8;margin-bottom:22px;flex:1;">
+          Once your SIP is running well, you can explore individual stocks and crypto. Both carry higher risk and require more involvement - but for the right person with the right mindset, they can be meaningful additions to a portfolio. I invest in both personally, and can guide you on where to start.
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px;">
+          <div style="display:flex;gap:8px;align-items:center;color:rgba(255,255,255,0.8);font-size:13px"><span style="color:var(--gold);font-weight:700">✓</span> Individual stocks - research based</div>
+          <div style="display:flex;gap:8px;align-items:center;color:rgba(255,255,255,0.8);font-size:13px"><span style="color:var(--gold);font-weight:700">✓</span> Crypto - BTC and ETH to start</div>
+          <div style="display:flex;gap:8px;align-items:center;color:rgba(255,255,255,0.8);font-size:13px"><span style="color:var(--gold);font-weight:700">✓</span> Long-term mindset - 10 to 20 years</div>
+          <div style="display:flex;gap:8px;align-items:center;color:rgba(255,255,255,0.8);font-size:13px"><span style="color:var(--gold);font-weight:700">✓</span> Only what you can afford to lose</div>
+        </div>
+        <div style="background:rgba(212,160,23,0.15);border-radius:14px;padding:14px 16px;font-size:13px;color:rgba(255,255,255,0.7);line-height:1.7;margin-top:auto;">
+          Keep stocks to 10-15% of portfolio max. Crypto to 20% max. MF always stays the core.
+        </div>
+      </div>
+
+      <!-- PATH 3 - Algo Trading + PMS -->
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:24px;padding:36px 28px;display:flex;flex-direction:column;">
+        <div style="font-size:44px;margin-bottom:16px">🤖</div>
+        <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.35);letter-spacing:2px;margin-bottom:10px">PATH 3 - AFTER MF IS RUNNING</div>
+        <div style="font-family:'Fraunces',serif;font-size:22px;color:var(--white);margin-bottom:14px;line-height:1.25">Algo Trading</div>
+        <div style="color:rgba(255,255,255,0.55);font-size:14px;line-height:1.8;margin-bottom:16px;">
+          Automated systems that trade the markets for you - no screen time, no emotions, no guesswork. You define rules, the system executes. Only explore this after your MF base is solid.
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
+          <div style="display:flex;gap:8px;align-items:center;color:rgba(255,255,255,0.6);font-size:13px"><span style="color:var(--amber);font-weight:700">→</span> Automated - no manual trading</div>
+          <div style="display:flex;gap:8px;align-items:center;color:rgba(255,255,255,0.6);font-size:13px"><span style="color:var(--amber);font-weight:700">→</span> No coding required - drag and drop</div>
+          <div style="display:flex;gap:8px;align-items:center;color:rgba(255,255,255,0.6);font-size:13px"><span style="color:var(--amber);font-weight:700">→</span> Only after MF SIP is running</div>
+        </div>
+
+        <!-- Webinars -->
+        <div style="background:rgba(255,255,255,0.06);border-radius:14px;padding:16px 18px;margin-bottom:14px;">
+          <div style="font-size:11px;font-weight:700;color:var(--sage);letter-spacing:1px;margin-bottom:10px;">MY LIVE WEBINARS</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <span style="font-size:14px;flex-shrink:0;">📅</span>
+              <div>
+                <div style="font-size:12px;font-weight:700;color:white;">Friday Webinar</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.5);">Live algo trading strategy sessions - every Friday</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <span style="font-size:14px;flex-shrink:0;">₿</span>
+              <div>
+                <div style="font-size:12px;font-weight:700;color:white;">Crypto Webinar (TT x Delta)</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.5);">Crypto strategies with Delta Exchange</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <span style="font-size:14px;flex-shrink:0;">🎙️</span>
+              <div>
+                <div style="font-size:12px;font-weight:700;color:white;">Tuesday Webinar with Manish Chandra</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.5);">Weekly live session every Tuesday</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PMS option inside algo -->
+        <div style="background:rgba(212,160,23,0.1);border:1px solid rgba(212,160,23,0.3);border-radius:14px;padding:16px 18px;margin-bottom:16px;">
+          <div style="font-size:12px;font-weight:700;color:var(--gold);margin-bottom:6px;">🤝 Not interested in trading at all?</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.7;">That is completely fine. I can connect you to strategies run by expert portfolio managers - matched to your capital and risk profile. Talk to me and I will guide you personally.</div>
+        </div>
+
+        <a href="https://tradetron.tech/html-view/webinars" target="_blank" style="display:inline-block;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.8);padding:13px 24px;border-radius:50px;font-weight:700;font-size:13px;text-decoration:none;border:1px solid rgba(255,255,255,0.15);text-align:center;">Learn About Algo Trading →</a>
+      </div>
+
+    </div>
+
+    <p style="color:rgba(255,255,255,0.35);font-size:13px;margin-top:32px;font-style:italic">The rest of this guide is entirely about mutual fund investing - Path 1. Take your time with it.</p>
   </div>
 </section>
+
+<style>
+  @media (max-width: 900px) {
+    #three-paths-grid { grid-template-columns: 1fr !important; }
+  }
+</style>
 
 <!-- WHAT IS MF -->
 <section id="what">
@@ -1768,6 +1981,17 @@ function getSuggestion() {
 </footer>
 
 <script>
+function toggleMobileNav() {
+  const menu = document.querySelector('.mobile-nav-menu');
+  menu.classList.toggle('open');
+  menu.style.display = menu.classList.contains('open') ? 'flex' : 'none';
+}
+function closeMobileNav() {
+  const menu = document.querySelector('.mobile-nav-menu');
+  menu.classList.remove('open');
+  menu.style.display = 'none';
+}
+
 function formatINR(num) {
   const cr = num / 10000000;
   const lakh = num / 100000;
